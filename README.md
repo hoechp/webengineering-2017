@@ -1,6 +1,6 @@
 # Overview
 
-This is my repository for exercises for the lecture Webengineering in the summer semester 2017 at the University of Kassel.
+This is my exercise repository for the lecture Webengineering in the summer semester 2017 at the University of Kassel.
 
 ## Communication
 
