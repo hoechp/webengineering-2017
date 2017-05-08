@@ -28,12 +28,12 @@ public class PostService {
      *
      * @param title the post title.
      */
-    public void addPost(String title) {
-        posts.add(new Post(posts.size(), title, new Date()));
+    public void addPost(Post post) {
+        posts.add(post);
     }
 
 
-	public Post getPost(int postId) {
+	public Post getPost(long postId) {
 		for (Post post : posts) {
 			if(post.getId() == postId) return post;
 		}
@@ -41,7 +41,7 @@ public class PostService {
 	}
 
 
-	public void deletePost(int postId) {
+	public void deletePost(long postId) {
 		for (Post post : posts) {
 			if(post.getId() == postId) posts.remove(post);
 		}
