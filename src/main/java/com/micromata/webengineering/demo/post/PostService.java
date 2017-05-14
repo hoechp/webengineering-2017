@@ -31,9 +31,10 @@ public class PostService {
      *
      * @param title the post title.
      */
-    public boolean addPost(Post post) {
+    public String addPost(Post post, String url) {
         repository.save(post);
-        return true;
+        String baseURL = url.substring(0, url.lastIndexOf("add"));
+        return baseURL + post.getId();
     }
 
 

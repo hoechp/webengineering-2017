@@ -1,5 +1,7 @@
 package com.micromata.webengineering.demo.post;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,8 +15,20 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class PostController {
+	
+	@Autowired(required=true)
+	private HttpServletRequest request;
+	
     @Autowired
     private PostService postService;
+    
+	public String getUrl() {
+		return makeUrl(request);
+	}
+	
+	public String makeUrl(HttpServletRequest request) {
+	    return request.getRequestURL().toString();// + "?" + request.getQueryString();
+	}
 
     @RequestMapping(value = "/post", method = RequestMethod.GET)
     public Iterable<Post> getPostList() {
@@ -27,8 +41,8 @@ public class PostController {
     }
 
     @RequestMapping(value = "/post/add", method = RequestMethod.POST)
-    public void addPost(@RequestBody Post post) {
-        postService.addPost(post);
+    public String addPost(@RequestBody Post post) {
+        return postService.addPost(post, getUrl());
     }
 
     @RequestMapping(value = "/post/delete", method = RequestMethod.DELETE)

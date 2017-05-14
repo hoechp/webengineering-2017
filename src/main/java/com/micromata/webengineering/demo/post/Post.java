@@ -6,49 +6,68 @@ import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 
 @Entity
 public class Post {
 	
-	private static AtomicLong nextId = new AtomicLong();
 	@Id
 	@GeneratedValue
 	private Long id;
 	private String title;
-	private Date timeOfCreation;
+	private Date createdAt;
+	private Date updatedAt;
 	
-	public Post() {
-		setId((Long)nextId.getAndIncrement());
-		setTimeOfCreation(new Date());
-	}
+	public Post() { }
 
-	public Post(long id, String title, Date timeOfCreation) {
+	public Post(Long id, String title, Date timeOfCreation) {
 		this.id = id;
 		this.title = title;
-		this.timeOfCreation = timeOfCreation;
+		this.createdAt = timeOfCreation;
 	}
 
 	public String getTitle() {
 		return title;
 	}
 
-	public Date getTimeOfCreation() {
-		return timeOfCreation;
+	public Date getCreatedAt() {
+		return createdAt;
 	}
 
-	public void setTimeOfCreation(Date timeOfCreation) {
-		this.timeOfCreation = timeOfCreation;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 
-	public long getId() {
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
+	@PrePersist
+	protected void onCreate() {
+		setCreatedAt(new Date());
+	}
+
+	@PreUpdate
+	protected void onUpdate() {
+		updatedAt = new Date();
+	}
+	
+	
 }
