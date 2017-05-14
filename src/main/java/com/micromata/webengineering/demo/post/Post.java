@@ -1,14 +1,23 @@
 package com.micromata.webengineering.demo.post;
 
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class Post {
 	
-	private int id;
+	private static AtomicLong nextId = new AtomicLong();
+	//@Id
+	//@GeneratedValue
+	private Long id;
 	private String title;
 	private Date timeOfCreation;
+	
+	public Post() {
+		setId((Long)nextId.getAndIncrement());
+		setTimeOfCreation(new Date());
+	}
 
-	public Post(int id, String title, Date timeOfCreation) {
+	public Post(long id, String title, Date timeOfCreation) {
 		this.id = id;
 		this.title = title;
 		this.timeOfCreation = timeOfCreation;
@@ -26,11 +35,11 @@ public class Post {
 		this.timeOfCreation = timeOfCreation;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
