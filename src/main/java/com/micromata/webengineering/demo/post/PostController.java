@@ -23,12 +23,12 @@ public class PostController {
         return postService.getPosts();
     }
     
-    @RequestMapping("/post/{postId}")
+    @RequestMapping(value = "/post/{postId}", method = RequestMethod.GET)
     public Post getPost(@PathVariable long postId){
     	return postService.getPost(postId);
     }
 
-    @RequestMapping(value = "/post", method = RequestMethod.POST)
+    @RequestMapping(value = "/post/add", method = RequestMethod.POST)
     public void addPost(@RequestBody Post post) {
         postService.addPost(post);
     }
