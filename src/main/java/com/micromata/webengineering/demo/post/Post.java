@@ -1,13 +1,15 @@
 package com.micromata.webengineering.demo.post;
 
 import java.util.Date;
-import java.util.concurrent.atomic.AtomicLong;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 public class Post {
@@ -15,6 +17,9 @@ public class Post {
 	@Id
 	@GeneratedValue
 	private Long id;
+	@Lob
+	@Type(type = "org.hibernate.type.TextType")
+	//@Column(name = "title", length=1023)
 	private String title;
 	private Date createdAt;
 	private Date updatedAt;

@@ -22,7 +22,7 @@ public class PostService {
      * @return post list
      */
     public Iterable<Post> getPosts() {
-    	return repository.findAll();
+    	return repository.findAllOrderedByCreatedAt();
     }
 
 
