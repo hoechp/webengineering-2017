@@ -3,11 +3,16 @@ package com.micromata.webengineering.demo.post;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicLong;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Post {
 	
 	private static AtomicLong nextId = new AtomicLong();
-	//@Id
-	//@GeneratedValue
+	@Id
+	@GeneratedValue
 	private Long id;
 	private String title;
 	private Date timeOfCreation;

@@ -18,8 +18,8 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-    @RequestMapping("/post")
-    public List<Post> getPostList() {
+    @RequestMapping(value = "/post", method = RequestMethod.GET)
+    public Iterable<Post> getPostList() {
         return postService.getPosts();
     }
     

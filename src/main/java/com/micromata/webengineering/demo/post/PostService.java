@@ -1,5 +1,6 @@
 package com.micromata.webengineering.demo.post;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
@@ -10,6 +11,9 @@ import java.util.List;
  */
 @Service
 public class PostService {
+	@Autowired
+	private PostRepository repository;
+	
     private List<Post> posts = new LinkedList<>();
     
     /**
@@ -17,8 +21,9 @@ public class PostService {
      *
      * @return post list
      */
-    public List<Post> getPosts() {
-        return posts;
+    public Iterable<Post> getPosts() {
+    	return repository.findAll();
+        //return posts;
     }
 
 
@@ -28,21 +33,24 @@ public class PostService {
      * @param title the post title.
      */
     public void addPost(Post post) {
-        posts.add(post);
+        repository.save(post);
+    	//posts.add(post);
     }
 
 
 	public Post getPost(long postId) {
-		for (Post post : posts) {
-			if(post.getId() == postId) return post;
-		}
-		return null; // Post with the given Id doesn't exist
+		return repository.findOne(postId);
+//		for (Post post : posts) {
+//			if(post.getId() == postId) return post;
+//		}
+//		return null; // Post with the given Id doesn't exist
 	}
 
 
 	public void deletePost(long postId) {
-		for (Post post : posts) {
-			if(post.getId() == postId) posts.remove(post);
-		}
+		repository.delete(postId);
+//		for (Post post : posts) {
+//			if(post.getId() == postId) posts.remove(post);
+//		}
 	}
 }
