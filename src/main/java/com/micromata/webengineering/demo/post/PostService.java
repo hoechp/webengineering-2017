@@ -23,7 +23,6 @@ public class PostService {
      */
     public Iterable<Post> getPosts() {
     	return repository.findAll();
-        //return posts;
     }
 
 
@@ -32,25 +31,19 @@ public class PostService {
      *
      * @param title the post title.
      */
-    public void addPost(Post post) {
+    public boolean addPost(Post post) {
         repository.save(post);
-    	//posts.add(post);
+        return true;
     }
 
 
 	public Post getPost(long postId) {
 		return repository.findOne(postId);
-//		for (Post post : posts) {
-//			if(post.getId() == postId) return post;
-//		}
-//		return null; // Post with the given Id doesn't exist
 	}
 
 
-	public void deletePost(long postId) {
+	public boolean deletePost(long postId) {
 		repository.delete(postId);
-//		for (Post post : posts) {
-//			if(post.getId() == postId) posts.remove(post);
-//		}
+		return true;
 	}
 }
